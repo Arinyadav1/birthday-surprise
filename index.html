@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎂</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
+    text-align:center;
+}
+
+/* ===== CINEMATIC BACKGROUND GLOW ===== */
+body::before{
+    content:"";
+    position:absolute;
+    width:150%;
+    height:150%;
+    background:radial-gradient(circle,
+        rgba(255,100,150,.25),
+        transparent 60%);
+    animation:glowMove 12s linear infinite;
+}
+@keyframes glowMove{
+    0%{transform:translate(-20%,-20%);}
+    50%{transform:translate(20%,20%);}
+    100%{transform:translate(-20%,-20%);}
+}
+
+/* ===== CONTAINER ===== */
+.container{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+    padding:30px;
+    animation:fadeIn 1.2s ease;
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+button{
+    margin-top:20px;
+    background:none;
+    border:none;
+    padding:0;
+
+    font-size:40px;   /* size of gift emoji */
+    cursor:pointer;
+
+    transition:transform .25s ease;
+}
+button:hover{transform:scale(1.08);}
+.hidden{display:none;}
+
+/* ===== BIRTHDAY TEXT ===== */
+.typing{
+    font-size:20px;
+    font-weight:700;
+    background:linear-gradient(90deg,#ff9a9e,#fad0c4,#fbc2eb);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:fadeIn 2s ease;
+}
+
+.final{
+    margin-top:20px;
+    font-size:28px;
+    animation:pulse 2s infinite;
+}
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+}
+
+/* ===== SLIDESHOW ===== */
+.slideshow{margin-top:25px;}
+.slideshow img{
+    width:300px;
+    border-radius:20px;
+    box-shadow:0 10px 35px rgba(0,0,0,.5);
+    animation:fadeImg 1s ease;
+}
+@keyframes fadeImg{
+    from{opacity:0;transform:scale(.9);}
+    to{opacity:1;transform:scale(1);}
+}
+
+/* ===== FLOATING HEARTS ===== */
+.heart{
+    position:absolute;
+    bottom:-30px;
+    font-size:22px;
+    animation:floatHeart linear forwards;
+    opacity:.8;
+}
+@keyframes floatHeart{
+    0%{transform:translateY(0) scale(1);}
+    100%{
+        transform:translateY(-120vh) translateX(40px) scale(1.6);
+        opacity:0;
+    }
+}
+
+/* ===== FLOATING HEART IMAGE ===== */
+.floating-img{
+    position:absolute;
+    width:30px;
+    height:30px;
+    bottom:-60px;
+    animation:floatImg linear forwards;
+    background-size:cover;
+    background-position:center;
+    opacity:.95;
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));
+
+    clip-path:path("M15 26 C15 26 3 18 3 9 C3 4 7 1 11 1 C13.5 1 15 3 15 5 C15 3 16.5 1 19 1 C23 1 27 4 27 9 C27 18 15 26 15 26 Z");
+}
+@keyframes floatImg{
+    0%{transform:translateY(0) scale(.8);opacity:0;}
+    20%{opacity:1;}
+    100%{
+        transform:translateY(-120vh) translateX(30px) scale(1.2);
+        opacity:0;
+    }
+}
+
+/* ===== SPARKLES ===== */
+.sparkle{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:spark 3s linear infinite;
+}
+@keyframes spark{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;transform:translateY(-20px);}
+}
+/* ===== CINEMATIC TITLE ===== */
+.cinematic-title{
+    font-size:20px;
+    font-weight:700;
+    margin-top:20px;
+    background:linear-gradient(90deg,#ff9a9e,#fad0c4,#fbc2eb);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:0 0 25px rgba(255,120,180,.6);
+    animation:titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+}
+
+/* ===== CAKE AREA ===== */
+.cake-wrapper{
+    position:relative;
+    margin-top:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* soft light behind cake */
+.cake-light{
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:radial-gradient(circle,
+        rgba(255,180,120,.5),
+        transparent 70%);
+    animation:lightPulse 2s infinite;
+}
+
+@keyframes lightPulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+/* cake */
+.cake{
+    font-size:70px;
+    z-index:2;
+    animation:cakeFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes cakeFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+}
+
+/* flame flicker */
+.flame{
+    position:absolute;
+    top:-15px;
+    font-size:20px;
+    animation:flicker .3s infinite alternate;
+}
+
+@keyframes flicker{
+    from{transform:scale(1);}
+    to{transform:scale(1.2) rotate(-5deg);}
+}
+
+/* ===== FINAL MESSAGE ===== */
+.cinematic-final{
+    font-size:20px;
+    margin-top:20px;
+    animation:fadeIn 2s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="startScreen">
+    <h2>🎂 A Birthday Surprise 🎂</h2>
+    <p style="margin-top:10px;">Open Your Surprice Jaan</p>
+    <button onclick="startSurprise()">🎁</button>
+</div>
+
+<div class="container hidden" id="messageScreen">
+
+    <!-- Cinematic Title -->
+    <div class="cinematic-title">
+        ✨ Happy Birthday Meri Jaan✨
+    </div>
+
+    <!-- Cake Area -->
+    <div class="cake-wrapper">
+        <div class="cake-light"></div>
+        <div class="cake">🎂</div>
+        <div class="flame">🔥</div>
+    </div>
+
+    <!-- Final Message -->
+    <div class="cinematic-final">
+        🎉 Wishing you joy, love & endless smiles 🎉
+    </div>
+
+</div>
+
+<script>
+
+/* HEARTS */
+setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),9000);
+},400);
+
+/* FLOATING HEART IMAGES */
+const imageList=[
+ "https://picsum.photos/120/120?1",
+ "https://picsum.photos/120/120?2",
+ "https://picsum.photos/120/120?3"
+];
+
+setInterval(()=>{
+    const img=document.createElement("div");
+    img.className="floating-img";
+    img.style.left=Math.random()*100+"vw";
+    img.style.backgroundImage=`url(${imageList[Math.floor(Math.random()*imageList.length)]})`;
+    const d=5+Math.random()*4;
+    img.style.animationDuration=d+"s";
+    document.body.appendChild(img);
+    setTimeout(()=>img.remove(),d*1000);
+},600);
+
+/* SPARKLES */
+setInterval(()=>{
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),3000);
+},200);
+
+/* START */
+function startSurprise(){
+    document.getElementById("startScreen").classList.add("hidden");
+    document.getElementById("messageScreen").classList.remove("hidden");
+    launchConfetti();
+}
+
+    function launchConfetti() {
+
+        let created = 0;
+        const MAX_CONFETTI = 500;   // total pieces
+        const BATCH = 8;            // how many spawn each wave
+
+        const interval = setInterval(() => {
+
+            for (let i = 0; i < BATCH; i++) {
+
+                if (created >= MAX_CONFETTI) {
+                    clearInterval(interval); // STOP creating
+                    return;
+                }
+
+                let c = document.createElement("div");
+
+                const size = 4 + Math.random() * 4;
+                const duration = 3 + Math.random() * 3;
+
+                c.style.position = "absolute";
+                c.style.width = size + "px";
+                c.style.height = size + "px";
+                c.style.background =
+                    `hsl(${Math.random() * 360},100%,50%)`;
+
+                c.style.left = Math.random() * innerWidth + "px";
+                c.style.top = "-20px";
+
+                c.style.borderRadius =
+                    Math.random() > 0.5 ? "50%" : "2px";
+
+                c.style.animation =
+                    `fall ${duration}s linear`;
+
+                document.body.appendChild(c);
+
+                // remove after fall ends
+                setTimeout(() => c.remove(), duration * 1000);
+
+                created++;
+            }
+
+        }, 120); // speed of spawning
+    }
+
+const style=document.createElement("style");
+style.innerHTML=`@keyframes fall{
+to{transform:translateY(110vh);opacity:0;}
+}`;
+document.head.appendChild(style);
+
+/* SLIDESHOW */
+const images=[
+ "https://picsum.photos/400/300?1",
+ "https://picsum.photos/400/300?2",
+ "https://picsum.photos/400/300?3"
+];
+let i=0;
+setInterval(()=>{
+ i=(i+1)%images.length;
+ document.getElementById("slideImage").src=images[i];
+},2500);
+
+</script>
+</body>
+</html>
