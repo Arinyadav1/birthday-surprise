@@ -1,350 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Surprise 🎂</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise 🎂</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-body{
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    color:white;
-    text-align:center;
-    position:relative;
-}
+        body {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                radial-gradient(circle at 20% 20%, #2b1b3d 0%, transparent 40%),
+                radial-gradient(circle at 80% 30%, #1a2b4d 0%, transparent 45%),
+                radial-gradient(circle at 50% 80%, #111827 0%, transparent 50%),
+                linear-gradient(180deg, #05070d, #0b1020, #111827);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
 
-/* ===== CINEMATIC BACKGROUND GLOW ===== */
-body::before{
-    content:"";
-    position:absolute;
-    width:150%;
-    height:150%;
-    background:radial-gradient(circle,
-        rgba(255,100,150,.25),
-        transparent 60%);
-    animation:glowMove 12s linear infinite;
-}
-@keyframes glowMove{
-    0%{transform:translate(-20%,-20%);}
-    50%{transform:translate(20%,20%);}
-    100%{transform:translate(-20%,-20%);}
-}
 
-/* ===== CONTAINER ===== */
-.container{
-    position:relative;
-    z-index:2;
-    max-width:700px;
-    padding:30px;
-    animation:fadeIn 1.2s ease;
-}
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;transform:translateY(0);}
-}
 
-button{
-    margin-top:20px;
-    background:none;
-    border:none;
-    padding:0;
+        /* ===== CINEMATIC BACKGROUND GLOW ===== */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle,
+                    rgba(255, 100, 150, .25),
+                    transparent 60%);
+            animation: glowMove 12s linear infinite;
+        }
 
-    font-size:40px;   /* size of gift emoji */
-    cursor:pointer;
+        @keyframes glowMove {
+            0% {
+                transform: translate(-20%, -20%);
+            }
 
-    transition:transform .25s ease;
-}
-button:hover{transform:scale(1.08);}
-.hidden{display:none;}
+            50% {
+                transform: translate(20%, 20%);
+            }
 
-/* ===== BIRTHDAY TEXT ===== */
-.typing{
-    font-size:20px;
-    font-weight:700;
-    background:linear-gradient(90deg,#ff9a9e,#fad0c4,#fbc2eb);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:fadeIn 2s ease;
-}
+            100% {
+                transform: translate(-20%, -20%);
+            }
+        }
 
-.final{
-    margin-top:20px;
-    font-size:28px;
-    animation:pulse 2s infinite;
-}
-@keyframes pulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-}
+        /* ===== CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 30px;
+            animation: fadeIn 1.2s ease;
+        }
 
-/* ===== FLOATING HEARTS ===== */
-.heart{
-    position:absolute;
-    bottom:-30px;
-    font-size:22px;
-    animation:floatHeart linear forwards;
-    opacity:.8;
-}
-@keyframes floatHeart{
-    0%{transform:translateY(0) scale(1);}
-    100%{
-        transform:translateY(-120vh) translateX(40px) scale(1.6);
-        opacity:0;
-    }
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-/* ===== FLOATING HEART IMAGE ===== */
-.floating-img{
-    position:absolute;
-    width:30px;
-    height:30px;
-    bottom:-60px;
-    animation:floatImg linear forwards;
-    background-size:cover;
-    background-position:center;
-    opacity:.95;
-    filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    clip-path:path("M15 26 C15 26 3 18 3 9 C3 4 7 1 11 1 C13.5 1 15 3 15 5 C15 3 16.5 1 19 1 C23 1 27 4 27 9 C27 18 15 26 15 26 Z");
-}
-@keyframes floatImg{
-    0%{transform:translateY(0) scale(.8);opacity:0;}
-    20%{opacity:1;}
-    100%{
-        transform:translateY(-120vh) translateX(30px) scale(1.2);
-        opacity:0;
-    }
-}
+        button {
+            margin-top: 20px;
+            background: none;
+            border: none;
+            padding: 0;
 
-/* ===== SPARKLES ===== */
-.sparkle{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:white;
-    border-radius:50%;
-    animation:spark 3s linear infinite;
-}
-@keyframes spark{
-    0%{opacity:0;}
-    50%{opacity:1;}
-    100%{opacity:0;transform:translateY(-20px);}
-}
-/* ===== CINEMATIC TITLE ===== */
-.cinematic-title{
-    font-family: 'Great Vibes';
-    font-size:19px;
-    font-weight:700;
-    margin-top:20px;
-    background:linear-gradient(90deg,#ff9a9e,#fad0c4,#fbc2eb);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    text-shadow:0 0 25px rgba(255,120,180,.6);
-    animation:titleGlow 3s ease-in-out infinite;
-}
+            font-size: 40px;
+            /* size of gift emoji */
+            cursor: pointer;
 
-@keyframes titleGlow{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-}
+            transition: transform .25s ease;
+        }
 
-/* ===== CAKE AREA ===== */
-.cake-wrapper{
-    position:relative;
-    margin-top:15px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+        button:hover {
+            transform: scale(1.08);
+        }
 
-/* soft light behind cake */
-.cake-light{
-    position:absolute;
-    width:120px;
-    height:120px;
-    background:radial-gradient(circle,
-        rgba(255,180,120,.5),
-        transparent 70%);
-    animation:lightPulse 2s infinite;
-}
+        .hidden {
+            display: none;
+        }
 
-@keyframes lightPulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-}
+        /* ===== BIRTHDAY TEXT ===== */
+        .typing {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 2s ease;
+        }
 
-/* cake */
-.cake{
-    font-size:70px;
-    z-index:2;
-    animation:cakeFloat 2.5s ease-in-out infinite;
-}
+        .final {
+            margin-top: 20px;
+            font-size: 28px;
+            animation: pulse 2s infinite;
+        }
 
-@keyframes cakeFloat{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-8px);}
-}
+        @keyframes pulse {
 
-@keyframes flicker{
-    from{transform:scale(1);}
-    to{transform:scale(1.2) rotate(-5deg);}
-}
+            0%,
+            100% {
+                transform: scale(1);
+            }
 
-/* ===== FINAL MESSAGE ===== */
-.cinematic-final{
-    font-family: 'Great Vibes';
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: #fff;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    animation: fadeIn 2s ease;
-}
+            50% {
+                transform: scale(1.05);
+            }
+        }
 
-</style>
+        /* ===== FLOATING HEARTS ===== */
+        .heart {
+            position: absolute;
+            bottom: -30px;
+            font-size: 22px;
+            animation: floatHeart linear forwards;
+            opacity: .8;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(-120vh) translateX(40px) scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        /* ===== FLOATING HEART IMAGE ===== */
+        .floating-img {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            bottom: -60px;
+            animation: floatImg linear forwards;
+            background-size: cover;
+            background-position: center;
+            opacity: .95;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .4));
+
+            clip-path: path("M15 26 C15 26 3 18 3 9 C3 4 7 1 11 1 C13.5 1 15 3 15 5 C15 3 16.5 1 19 1 C23 1 27 4 27 9 C27 18 15 26 15 26 Z");
+        }
+
+        @keyframes floatImg {
+            0% {
+                transform: translateY(0) scale(.8);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-120vh) translateX(30px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* ===== CINEMATIC TITLE ===== */
+        .cinematic-title {
+            font-family: 'Great Vibes';
+            font-size: 19px;
+            font-weight: 700;
+            margin-top: 20px;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(255, 120, 180, .6);
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* ===== CAKE AREA ===== */
+        .cake-wrapper {
+            position: relative;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* soft light behind cake */
+        .cake-light {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle,
+                    rgba(255, 180, 120, .5),
+                    transparent 70%);
+            animation: lightPulse 2s infinite;
+        }
+
+        @keyframes lightPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* cake */
+        .cake {
+            font-size: 70px;
+            z-index: 2;
+            animation: cakeFloat 2.5s ease-in-out infinite;
+        }
+
+        @keyframes cakeFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes flicker {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.2) rotate(-5deg);
+            }
+        }
+
+        /* ===== FINAL MESSAGE ===== */
+        .cinematic-final {
+            font-family: 'Great Vibes';
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease;
+        }
+
+        /* ===== MOON ===== */
+        /* ===== SOFT GLOWING MOON ===== */
+        .moon {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            z-index: 1;
+
+            /* soft white moon */
+            background: radial-gradient(circle,
+                    #ffffff 0%,
+                    #f7f7f7 60%,
+                    #eeeeee 100%);
+
+            /* BIG SOFT GLOW */
+            box-shadow:
+                0 0 20px rgba(255, 255, 255, .8),
+                0 0 50px rgba(255, 255, 255, .6),
+                0 0 90px rgba(255, 255, 255, .35);
+        }
+
+        /* ===== METEOR STARS ===== */
+        .meteor {
+            position: fixed;
+            width: 130px;
+            height: 1.5px;
+
+            /* natural meteor colors */
+            background: linear-gradient(to right,
+                    rgba(255, 255, 255, 0),
+                    rgba(255, 220, 170, 0.15),
+                    rgba(255, 240, 210, 0.5),
+                    rgba(255, 255, 255, 0.9));
+
+            border-radius: 50px;
+            transform: rotate(25deg);
+            pointer-events: none;
+            z-index: 1;
+
+            opacity: .8;
+
+            /* soft subtle glow */
+            box-shadow:
+                0 0 4px rgba(255, 240, 200, .25),
+                0 0 8px rgba(255, 255, 255, .2);
+        }
+
+        @keyframes meteorFall {
+            from {
+                transform: translate(0, 0) rotate(25deg);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(300px, 300px) rotate(25deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== UNIVERSE STARS ===== */
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* ===== RANDOM STARS ===== */
+        .star {
+            position: fixed;
+            border-radius: 50%;
+            background: white;
+            pointer-events: none;
+            z-index: 0;
+
+            box-shadow:
+                0 0 5px rgba(255, 255, 255, .8),
+                0 0 10px rgba(255, 255, 255, .4);
+
+            animation: starTwinkle 5s ease-in-out forwards;
+        }
+
+        @keyframes starTwinkle {
+            0% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* ===== STABLE STARS ===== */
+        .stable-star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: white;
+            opacity: .7;
+            pointer-events: none;
+            z-index: 0;
+
+            box-shadow:
+                0 0 4px rgba(255, 255, 255, .6),
+                0 0 8px rgba(255, 255, 255, .3);
+        }
+    </style>
 </head>
 
 <body>
+    <div class="stars"></div>
+    <div class="moon"></div>
 
-<div class="container" id="startScreen">
-    <h2 style="font-family: 'Great Vibes';">
-        🎂 A Birthday Surprise 🎂
-    </h2>
-    
-    <p style="margin-top:10px; font-family: 'Great Vibes';">
-        Open Your Surprise Jaan
-    </p>
-    <button onclick="startSurprise()">🎁</button>
-</div>
+    <div class="container" id="startScreen">
+        <h2 style="font-family: 'Great Vibes';">
+            🎂 A Birthday Surprise 🎂
+        </h2>
 
-<div class="container hidden" id="messageScreen">
-
-    <!-- Cinematic Title -->
-    <div class="cinematic-title">
-        ✨ Happy Birthday Meri Jaan ✨
+        <p style="margin-top:10px; font-family: 'Great Vibes';">
+            Open Your Surprise Jaan
+        </p>
+        <button onclick="startSurprise()">🎁</button>
     </div>
 
-    <!-- Cake Area -->
-    <div class="cake-wrapper">
-        <div class="cake-light"></div>
-        <div class="cake">🎂</div>
+    <div class="container hidden" id="messageScreen">
+
+        <!-- Cinematic Title -->
+        <div class="cinematic-title">
+            ✨ Happy Birthday Meri Jaan ✨
+        </div>
+
+        <!-- Cake Area -->
+        <div class="cake-wrapper">
+            <div class="cake-light"></div>
+            <div class="cake">🎂</div>
+        </div>
+
+        <!-- Final Message -->
+        <div class="cinematic-final">
+            🎉 Every day with you is a gift, and today I celebrate the most special person in my life. Thank you for
+            filling my world
+            with love and happiness. I love you endlessly 🎂✨ 🎉
+        </div>
+
     </div>
 
-    <!-- Final Message -->
-    <div class="cinematic-final">
-        🎉 Every day with you is a gift, and today I celebrate the most special person in my life. Thank you for filling my world
-        with love and happiness. I love you endlessly 🎂✨ 🎉
-    </div>
+    <script>
 
-</div>
+        /* HEARTS */
+        setInterval(() => {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerHTML = "❤️";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.animationDuration = (5 + Math.random() * 5) + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 9000);
+        }, 400);
 
-<script>
+        /* FLOATING HEART IMAGES */
+        const imageList = [
+            "Screenshot 2026-02-28 202843.png",
+            "Screenshot 2026-02-28 203006.png",
+            "Screenshot 2026-02-28 203016.png",
+            "Screenshot 2026-02-28 203056.png",
+            "Screenshot 2026-02-28 203215.png",
+            "Screenshot 2026-02-28 203248.png",
+            "Screenshot 2026-02-28 203310.png",
+            "Screenshot 2026-02-28 203423.png",
+        ];
 
-/* HEARTS */
-setInterval(()=>{
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=(5+Math.random()*5)+"s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),9000);
-},400);
+        setInterval(() => {
+            const img = document.createElement("div");
+            img.className = "floating-img";
+            img.style.left = Math.random() * 100 + "vw";
+            img.style.backgroundImage = `url(${imageList[Math.floor(Math.random() * imageList.length)]})`;
+            const d = 5 + Math.random() * 4;
+            img.style.animationDuration = d + "s";
+            document.body.appendChild(img);
+            setTimeout(() => img.remove(), d * 1000);
+        }, 600);
 
-/* FLOATING HEART IMAGES */
-const imageList=[
- "https://picsum.photos/120/120?1",
- "https://picsum.photos/120/120?2",
- "https://picsum.photos/120/120?3"
-];
 
-setInterval(()=>{
-    const img=document.createElement("div");
-    img.className="floating-img";
-    img.style.left=Math.random()*100+"vw";
-    img.style.backgroundImage=`url(${imageList[Math.floor(Math.random()*imageList.length)]})`;
-    const d=5+Math.random()*4;
-    img.style.animationDuration=d+"s";
-    document.body.appendChild(img);
-    setTimeout(()=>img.remove(),d*1000);
-},600);
+        /* START */
+        function startSurprise() {
+            document.getElementById("startScreen").classList.add("hidden");
+            document.getElementById("messageScreen").classList.remove("hidden");
+            launchConfetti();
+        }
 
-/* SPARKLES */
-setInterval(()=>{
-    const s=document.createElement("div");
-    s.className="sparkle";
-    s.style.left=Math.random()*100+"vw";
-    s.style.top=Math.random()*100+"vh";
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),3000);
-},200);
+        function launchConfetti() {
 
-/* START */
-function startSurprise(){
-    document.getElementById("startScreen").classList.add("hidden");
-    document.getElementById("messageScreen").classList.remove("hidden");
-    launchConfetti();
-}
+            let created = 0;
+            const MAX_CONFETTI = 500;   // total pieces
+            const BATCH = 8;            // how many spawn each wave
 
-    function launchConfetti() {
+            const interval = setInterval(() => {
 
-        let created = 0;
-        const MAX_CONFETTI = 500;   // total pieces
-        const BATCH = 8;            // how many spawn each wave
+                for (let i = 0; i < BATCH; i++) {
 
-        const interval = setInterval(() => {
+                    if (created >= MAX_CONFETTI) {
+                        clearInterval(interval); // STOP creating
+                        return;
+                    }
 
-            for (let i = 0; i < BATCH; i++) {
+                    let c = document.createElement("div");
 
-                if (created >= MAX_CONFETTI) {
-                    clearInterval(interval); // STOP creating
-                    return;
+                    const size = 4 + Math.random() * 4;
+                    const duration = 3 + Math.random() * 3;
+
+                    c.style.position = "absolute";
+                    c.style.width = size + "px";
+                    c.style.height = size + "px";
+                    c.style.background =
+                        `hsl(${Math.random() * 360},100%,50%)`;
+
+                    c.style.left = Math.random() * innerWidth + "px";
+                    c.style.top = "-20px";
+
+                    c.style.borderRadius =
+                        Math.random() > 0.5 ? "50%" : "2px";
+
+                    c.style.animation =
+                        `fall ${duration}s linear`;
+
+                    document.body.appendChild(c);
+
+                    // remove after fall ends
+                    setTimeout(() => c.remove(), duration * 1000);
+
+                    created++;
                 }
 
-                let c = document.createElement("div");
+            }, 120); // speed of spawning
+        }
 
-                const size = 4 + Math.random() * 4;
-                const duration = 3 + Math.random() * 3;
-
-                c.style.position = "absolute";
-                c.style.width = size + "px";
-                c.style.height = size + "px";
-                c.style.background =
-                    `hsl(${Math.random() * 360},100%,50%)`;
-
-                c.style.left = Math.random() * innerWidth + "px";
-                c.style.top = "-20px";
-
-                c.style.borderRadius =
-                    Math.random() > 0.5 ? "50%" : "2px";
-
-                c.style.animation =
-                    `fall ${duration}s linear`;
-
-                document.body.appendChild(c);
-
-                // remove after fall ends
-                setTimeout(() => c.remove(), duration * 1000);
-
-                created++;
-            }
-
-        }, 120); // speed of spawning
-    }
-
-const style=document.createElement("style");
-style.innerHTML=`@keyframes fall{
+        const style = document.createElement("style");
+        style.innerHTML = `@keyframes fall{
 to{transform:translateY(110vh);opacity:0;}
 }`;
-document.head.appendChild(style);
+        document.head.appendChild(style);
 
-</script>
+        /* ===== METEOR STARS ===== */
+        setInterval(() => {
+
+            const m = document.createElement("div");
+            m.className = "meteor";
+
+            // random start position (top area)
+            m.style.left = Math.random() * window.innerWidth + "px";
+            m.style.top = Math.random() * 200 + "px";
+
+            const duration = 1.5 + Math.random() * 2;
+            m.style.animation = `meteorFall ${duration}s linear`;
+
+            document.body.appendChild(m);
+
+            setTimeout(() => m.remove(), duration * 1000);
+
+        }, 1200); // meteor frequency
+
+        /* ===== RANDOM BLINKING STARS ===== */
+        setInterval(() => {
+
+            const star = document.createElement("div");
+            star.className = "star";
+
+            star.style.left = Math.random() * window.innerWidth + "px";
+            star.style.top = Math.random() * window.innerHeight + "px";
+
+            const size = 1 + Math.random() * 2;
+            star.style.width = size + "px";
+            star.style.height = size + "px";
+
+            document.body.appendChild(star);
+
+            setTimeout(() => star.remove(), 5000);
+
+        }, 800);
+
+        /* ===== CREATE STABLE STARS ===== */
+        for (let i = 0; i < 40; i++) {
+
+            const s = document.createElement("div");
+            s.className = "stable-star";
+
+            s.style.left = Math.random() * window.innerWidth + "px";
+            s.style.top = Math.random() * window.innerHeight + "px";
+
+            const size = 1 + Math.random() * 2;
+            s.style.width = size + "px";
+            s.style.height = size + "px";
+
+            document.body.appendChild(s);
+        }
+
+    </script>
 </body>
+
 </html>
