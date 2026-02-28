@@ -17,6 +17,7 @@ body{
     background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     color:white;
     text-align:center;
+    position:relative;
 }
 
 /* ===== CINEMATIC BACKGROUND GLOW ===== */
@@ -83,19 +84,6 @@ button:hover{transform:scale(1.08);}
     50%{transform:scale(1.05);}
 }
 
-/* ===== SLIDESHOW ===== */
-.slideshow{margin-top:25px;}
-.slideshow img{
-    width:300px;
-    border-radius:20px;
-    box-shadow:0 10px 35px rgba(0,0,0,.5);
-    animation:fadeImg 1s ease;
-}
-@keyframes fadeImg{
-    from{opacity:0;transform:scale(.9);}
-    to{opacity:1;transform:scale(1);}
-}
-
 /* ===== FLOATING HEARTS ===== */
 .heart{
     position:absolute;
@@ -151,7 +139,8 @@ button:hover{transform:scale(1.08);}
 }
 /* ===== CINEMATIC TITLE ===== */
 .cinematic-title{
-    font-size:20px;
+    font-family: 'Great Vibes', cursive;
+    font-size:19px;
     font-weight:700;
     margin-top:20px;
     background:linear-gradient(90deg,#ff9a9e,#fad0c4,#fbc2eb);
@@ -203,14 +192,6 @@ button:hover{transform:scale(1.08);}
     50%{transform:translateY(-8px);}
 }
 
-/* flame flicker */
-.flame{
-    position:absolute;
-    top:-15px;
-    font-size:20px;
-    animation:flicker .3s infinite alternate;
-}
-
 @keyframes flicker{
     from{transform:scale(1);}
     to{transform:scale(1.2) rotate(-5deg);}
@@ -218,18 +199,28 @@ button:hover{transform:scale(1.08);}
 
 /* ===== FINAL MESSAGE ===== */
 .cinematic-final{
-    font-size:20px;
-    margin-top:20px;
-    animation:fadeIn 2s ease;
+    font-family: 'Great Vibes', cursive;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    animation: fadeIn 2s ease;
 }
+
 </style>
 </head>
 
 <body>
 
 <div class="container" id="startScreen">
-    <h2>🎂 A Birthday Surprise 🎂</h2>
-    <p style="margin-top:10px;">Open Your Surprice Jaan</p>
+    <h2 style="font-family: 'Great Vibes', cursive;">
+        🎂A Birthday Surprise🎂
+    </h2>
+    
+    <p style="margin-top:10px; font-family: 'Great Vibes', cursive;">
+        Open Your Surprise Jaan
+    </p>
     <button onclick="startSurprise()">🎁</button>
 </div>
 
@@ -237,19 +228,19 @@ button:hover{transform:scale(1.08);}
 
     <!-- Cinematic Title -->
     <div class="cinematic-title">
-        ✨ Happy Birthday Meri Jaan✨
+        ✨ Happy Birthday Meri Jaan ✨
     </div>
 
     <!-- Cake Area -->
     <div class="cake-wrapper">
         <div class="cake-light"></div>
         <div class="cake">🎂</div>
-        <div class="flame">🔥</div>
     </div>
 
     <!-- Final Message -->
     <div class="cinematic-final">
-        🎉 Wishing you joy, love & endless smiles 🎉
+        🎉 Every day with you is a gift, and today I celebrate the most special person in my life. Thank you for filling my world
+        with love and happiness. I love you endlessly 🎂✨ 🎉
     </div>
 
 </div>
@@ -353,18 +344,6 @@ style.innerHTML=`@keyframes fall{
 to{transform:translateY(110vh);opacity:0;}
 }`;
 document.head.appendChild(style);
-
-/* SLIDESHOW */
-const images=[
- "https://picsum.photos/400/300?1",
- "https://picsum.photos/400/300?2",
- "https://picsum.photos/400/300?3"
-];
-let i=0;
-setInterval(()=>{
- i=(i+1)%images.length;
- document.getElementById("slideImage").src=images[i];
-},2500);
 
 </script>
 </body>
